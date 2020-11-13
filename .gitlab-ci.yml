@@ -1,0 +1,41 @@
+services:
+  - eclipse-mosquitto:latest
+
+npm-upload:
+  image: node:latest
+  stage: deploy
+  before_script:
+    - npm config set @smart-home-the-verse:registry https://gitlab.com/api/v4/packages/npm/
+    - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+    - npm config set '//gitlab.com/api/v4/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+  script:
+    - npm install
+    - npm run tsc
+    - npm publish
+  only:
+    - master
+
+test:
+  image: node:latest
+  stage: test
+  variables:
+    NODE_ENV: test
+    MQTT_BROKER: eclipse-mosquitto
+  script:
+    - npm install
+    - npm run test
+
+stages:
+  - build
+  - test
+  - deploy
+
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: License-Scanning.gitlab-ci.yml
+  - template: SAST.gitlab-ci.yml
+  - template: Code-Quality.gitlab-ci.yml
+  
+code_quality:
+  artifacts:
+    paths: [gl-code-quality-report.json]

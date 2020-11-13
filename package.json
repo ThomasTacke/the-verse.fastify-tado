@@ -1,0 +1,34 @@
+{
+  "name": "@smart-home-the-verse/fastify-tado",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/smart-home-the-verse/fastify-tado.git"
+  },
+  "author": "Thomas Tacke <thomas@tacke.email>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/smart-home-the-verse/fastify-tado/issues"
+  },
+  "homepage": "https://gitlab.com/smart-home-the-verse/fastify-tado#readme",
+  "devDependencies": {
+    "@types/node": "^13.9.8",
+    "fastify": "^2.13.0",
+    "tap": "^14.10.7",
+    "ts-node": "^8.8.1",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3"
+  },
+  "publishConfig": {
+    "@smart-home-the-verse:registry": "https://gitlab.com/api/v4/projects/17867700/packages/npm/"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fastify-plugin": "^1.6.1"
+  }
+}
